@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6E68CB28-36D4-4DA9-BD73-FC0394600881}</ProjectGuid>
+    <ProjectGuid>{7D1CC280-913F-4D5D-8C65-305B16D5634C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BezierCurve</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>

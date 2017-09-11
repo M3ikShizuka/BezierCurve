@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Head">
+      <UniqueIdentifier>{f73177a1-c7ed-4f3c-9049-9aa3dd56b536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{911d25e3-c3e6-49d5-96d5-9b76d3a0ceab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Draw">
+      <UniqueIdentifier>{fc5358a8-e301-4ed9-8f04-1ac19dfd7c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bezier">
+      <UniqueIdentifier>{01ccda43-5c8d-474f-a8bf-5abf2780489a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="head.hpp">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="main.hpp">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="draw.hpp">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="curve.hpp">
+      <Filter>Bezier</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="draw.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="curve.cpp">
+      <Filter>Bezier</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

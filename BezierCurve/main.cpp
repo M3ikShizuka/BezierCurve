@@ -1,48 +1,44 @@
+#ifdef MEMORY_LEAKS_TEST
+	#define _CRTDBG_MAP_ALLOC
+	#include <stdlib.h>
+	#include <crtdbg.h>
+#endif
 #include "main.hpp"
-#include "draw.hpp"
-#include "curve.hpp"
+#include "CCurve.hpp"
+#include "render.hpp"
 
-const int g_iScreenX= 600,
-			g_iScreenY = 450;
+void InitCurve();
+void ReleaseCurve();
 
 int main(int argc, char *argv[])
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(g_iScreenX, g_iScreenY);
-	glutCreateWindow("ShizukaSystems::BezierCurve");
-	// »нициализа€ци€ кривых безье
-	InitBezier();
-	glutReshapeFunc(Reshape);
-	glutDisplayFunc(RenderScene);
-	glutMainLoop();
+#ifdef MEMORY_LEAKS_TEST
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
+
+	// Initializing Curve curves.
+	InitCurve();
+	// Initializing render.
+	InitRender(argc, argv);
+	//Release
+	ReleaseCurve();
 
 	return 0;
 }
 
-void Reshape(int w, int h)
+void InitCurve()
 {
-	glViewport(0, 0, g_iScreenX, g_iScreenY);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0, g_iScreenX, g_iScreenY, 0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	g_pCurve = new CCurve();
+	const SLine* pLine = new SLine({ POINTFLOAT{ 100, 100 }, POINTFLOAT{ 150, 200 } });
+	g_pCurve->AddLine(pLine);
+	pLine = new SLine({ POINTFLOAT{ 150, 200 }, POINTFLOAT{ 450, 300 } });
+	g_pCurve->AddLine(pLine);
+	pLine = new SLine({ POINTFLOAT{ 450, 300 }, POINTFLOAT{ 460, 100 } });
+	g_pCurve->AddLine(pLine);
 }
 
-void RenderScene(void)
+void ReleaseCurve()
 {
-	static int iKeyCurrent = 0;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPointSize(6);
-	glLineWidth(3);
-	g_pBezier->Draw(iKeyCurrent);
-	glutSwapBuffers();
-	glutPostRedisplay();
-	// ”величиваем keyTime анимации
-	if (iKeyCurrent == 100)
-		iKeyCurrent = 0;
-	else
-		iKeyCurrent++;
+	delete g_pCurve;
+	g_pCurve = nullptr;
 }

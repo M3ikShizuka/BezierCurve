@@ -7,11 +7,14 @@
     <Filter Include="Main">
       <UniqueIdentifier>{911d25e3-c3e6-49d5-96d5-9b76d3a0ceab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Draw">
-      <UniqueIdentifier>{fc5358a8-e301-4ed9-8f04-1ac19dfd7c03}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Bezier">
       <UniqueIdentifier>{01ccda43-5c8d-474f-a8bf-5abf2780489a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{b39a5fd8-a7e5-408e-9d2e-ba1bbd351453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Draw">
+      <UniqueIdentifier>{fc5358a8-e301-4ed9-8f04-1ac19dfd7c03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,22 +24,28 @@
     <ClInclude Include="main.hpp">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="draw.hpp">
-      <Filter>Draw</Filter>
+    <ClInclude Include="CDraw.hpp">
+      <Filter>Render\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="curve.hpp">
+    <ClInclude Include="CCurve.hpp">
       <Filter>Bezier</Filter>
+    </ClInclude>
+    <ClInclude Include="render.hpp">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="draw.cpp">
-      <Filter>Draw</Filter>
+    <ClCompile Include="CDraw.cpp">
+      <Filter>Render\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="curve.cpp">
+    <ClCompile Include="CCurve.cpp">
       <Filter>Bezier</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

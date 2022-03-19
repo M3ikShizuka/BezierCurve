@@ -22,32 +22,32 @@
     <ProjectGuid>{7D1CC280-913F-4D5D-8C65-305B16D5634C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BezierCurve</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -71,23 +71,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\#\GL Full\glutdlls36;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\#\GL Full\glutdlls36;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\#\GL Full\glutdlls36;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\#\GL Full\glutdlls36;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\#\GL Full\glutdlls36;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\#\GL Full\glutdlls36;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\#\GL Full\glutdlls36;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\#\GL Full\glutdlls36;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(SolutionDir)\Dependencies\glut-3.7.6-bin;$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -167,15 +171,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="curve.hpp" />
-    <ClInclude Include="draw.hpp" />
+    <ClInclude Include="CCurve.hpp" />
+    <ClInclude Include="CDraw.hpp" />
     <ClInclude Include="head.hpp" />
     <ClInclude Include="main.hpp" />
+    <ClInclude Include="render.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="curve.cpp" />
-    <ClCompile Include="draw.cpp" />
+    <ClCompile Include="CCurve.cpp" />
+    <ClCompile Include="CDraw.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="render.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

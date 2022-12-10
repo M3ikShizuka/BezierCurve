@@ -1,7 +1,5 @@
 #include "CDraw.hpp"
 
-CDraw *g_pDraw = nullptr;
-
 void CDraw::Point(const POINTFLOAT& point)
 {
 	glBegin(GL_POINTS);

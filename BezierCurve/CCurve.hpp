@@ -1,18 +1,8 @@
 #pragma once
 #include "head.hpp"
+#include "ICurve.hpp"
 
-struct SLine;
-class CCurve;
-
-extern CCurve* g_pCurve;
-
-struct SLine
-{
-	POINTFLOAT start,
-		end;
-};
-
-class CCurve 
+class CCurve final : public ICurve
 {
 private:
 	std::vector<const SLine*> vLines;
@@ -21,14 +11,16 @@ private:
 
 public:
 	CCurve();
-	~CCurve();
+	virtual ~CCurve();
 
-	void Clear();
-	void ClearPoints();
-	void AddLine(const SLine* pLine);
-	const std::vector<const SLine*>& GetLines();
-	std::vector<POINTFLOAT*>& GetPoints();
-	const int GetKeyCount();
-	void CalcLinePos(const SLine* psLine1Pos, const SLine* psLine2Pos, SLine* psPosCurrent, const int iKeyCurrent);
-	void CalcPointPos(const SLine* psLine1Pos, POINTFLOAT* psPosCurrent, const int iKeyCurrent);
+public:
+	virtual void Clear();
+	virtual void ClearLines();
+	virtual void ClearPoints();
+	virtual void AddLine(const SLine* pLine);
+	virtual const std::vector<const SLine*>& GetLines();
+	virtual std::vector<POINTFLOAT*>& GetPoints();
+	virtual const int GetKeyCount();
+	virtual void CalcLinePos(const SLine* psLine1Pos, const SLine* psLine2Pos, SLine* psPosCurrent, const int iKeyCurrent);
+	virtual void CalcPointPos(const SLine* psLine1Pos, POINTFLOAT* psPosCurrent, const int iKeyCurrent);
 };

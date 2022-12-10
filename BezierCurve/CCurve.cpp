@@ -1,7 +1,5 @@
 #include "CCurve.hpp"
 
-CCurve* g_pCurve = nullptr;
-
 CCurve::CCurve() : iKeyCount(100)
 {
 
@@ -15,17 +13,21 @@ CCurve::~CCurve()
 
 void CCurve::Clear()
 {
+	this->ClearLines();
+	this->ClearPoints();
+}
+
+void CCurve::ClearLines()
+{
 	const size_t szLinesCount = this->vLines.size();
-	
+
 	// Release memory.
 	for (size_t szIndex = 0; szIndex < szLinesCount; szIndex++)
 	{
 		delete this->vLines[szIndex];
 	}
-		
-	this->vLines.clear();
 
-	this->ClearPoints();
+	this->vLines.clear();
 }
 
 void CCurve::ClearPoints()

@@ -3,7 +3,7 @@ Mathematics. Bezier curves. Test project for the implementation of animation for
 
 * main - main initialization. 
 * CCurve - Bézier curve model.
-* render - Rendering processing and management.
+* CRender - Rendering processing and management.
 * CDraw - OpenGL draw.
 * head.hpp - preprocessors for build with MEMORY_LEAKS_TEST.
 

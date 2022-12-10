@@ -1,45 +1,76 @@
-#include "render.hpp"
+#include "CRender.hpp"
 #include "CDraw.hpp"
-#include "CCurve.hpp"
+#include "ICurve.hpp"
 
-const int g_iScreenX = 600,
-	g_iScreenY = 450;
+// The trick for call CRender::RenderScene() from RenderSceneWrapper();
+IRender* g_pRender = nullptr;
 
 void Reshape(int w, int h);
-void RenderScene();
-void DrawCurve(CCurve* pCurve, const int iKeyCurrent);
-void DrawCurveLines(
-	CCurve* pCurve,
-	const std::vector<const SLine*>& vLines,
-	std::vector<POINTFLOAT*>& vPoints,
-	const int iKeyCurrent,
-	const float(fLinesLayerColorsArray)[][4],
-	const int iLinesLayer
-);
+void RenderSceneWrapper();
 
-void InitRender(int argc, char* argv[])
+CRender::CRender(IDraw* pDraw_, ICurve* pCurve_)
+	: pDraw(pDraw_)
+	, pCurve(pCurve_)
 {
+	// Initializing Curve curves.
+	this->InitCurve();
+}
+
+CRender::~CRender()
+{
+	//Release
+	this->ReleaseCurve();
+}
+
+void CRender::InitCurve()
+{
+	const SLine* pLine = new SLine({ POINTFLOAT{ 100, 100 }, POINTFLOAT{ 150, 200 } });
+	this->pCurve->AddLine(pLine);
+	pLine = new SLine({ POINTFLOAT{ 150, 200 }, POINTFLOAT{ 450, 300 } });
+	this->pCurve->AddLine(pLine);
+	pLine = new SLine({ POINTFLOAT{ 450, 300 }, POINTFLOAT{ 460, 100 } });
+	this->pCurve->AddLine(pLine);
+}
+
+void CRender::ReleaseCurve()
+{
+	if (this->pCurve)
+	{
+		delete this->pCurve;
+		this->pCurve = nullptr;
+	}
+}
+
+void CRender::InitRender(int argc, char* argv[])
+{
+	g_pRender = this;
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(g_iScreenX, g_iScreenY);
+	glutInitWindowSize(this->iScreenX, this->iScreenY);
 	glutCreateWindow("ShizukaSystems::CurveCurve");
 	glutReshapeFunc(Reshape);
-	glutDisplayFunc(RenderScene);
+	glutDisplayFunc(RenderSceneWrapper);
 	glutMainLoop();
 }
 
 void Reshape(int w, int h)
 {
-	glViewport(0, 0, g_iScreenX, g_iScreenY);
+	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, g_iScreenX, g_iScreenY, 0);
+	gluOrtho2D(0, w, h, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
-void RenderScene(void)
+void RenderSceneWrapper()
+{
+	g_pRender->RenderScene();
+}
+
+void CRender::RenderScene()
 {
 #ifdef MEMORY_LEAKS_TEST
 	static _CrtMemState memState1,
@@ -48,7 +79,7 @@ void RenderScene(void)
 #endif
 
 	static int iKeyCurrent = 0;
-	static const int iKeyCount = g_pCurve->GetKeyCount();
+	static const int iKeyCount = this->pCurve->GetKeyCount();
 
 	static ULONGLONG ullTickStart = GetTickCount64();
 	ULONGLONG ullTickCurrent = GetTickCount64();
@@ -58,7 +89,7 @@ void RenderScene(void)
 	glLineWidth(3);
 
 	// Draw.
-	DrawCurve(g_pCurve, iKeyCurrent);
+	DrawCurve(this->pCurve, iKeyCurrent);
 
 #ifdef MEMORY_LEAKS_TEST_ENABLE_LEAK
 	// Memory leak test.
@@ -76,7 +107,7 @@ void RenderScene(void)
 			iKeyCurrent = 0;
 
 #ifdef MEMORY_LEAKS_TEST
-			g_pCurve->ClearPoints();
+			this->pCurve->ClearPoints();
 
 			static bool bOnce = true;
 			if (bOnce)
@@ -104,7 +135,7 @@ void RenderScene(void)
 	}
 }
 
-void DrawCurve(CCurve* pCurve, const int iKeyCurrent)
+void CRender::DrawCurve(ICurve* pCurve, const int iKeyCurrent)
 {
 	const std::vector<const SLine*> vLines = pCurve->GetLines();
 	std::vector<POINTFLOAT*>& vPoints = pCurve->GetPoints();
@@ -124,8 +155,8 @@ void DrawCurve(CCurve* pCurve, const int iKeyCurrent)
 	DrawCurveLines(pCurve, vLines, vPoints, iKeyCurrent, fLinesLayerColorsArray, iLinesLayer);
 }
 
-void DrawCurveLines(
-	CCurve* pCurve,
+void CRender::DrawCurveLines(
+	ICurve* pCurve,
 	const std::vector<const SLine*>& vLines,
 	std::vector<POINTFLOAT*>& vPoints, 
 	const int iKeyCurrent, 
@@ -145,7 +176,7 @@ void DrawCurveLines(
 			const SLine* pLine = vLines[szIndex];
 
 			glColor4f(fLinesCollorCurrentLayerArray[0], fLinesCollorCurrentLayerArray[1], fLinesCollorCurrentLayerArray[2], fLinesCollorCurrentLayerArray[3]);
-			g_pDraw->Line(pLine->start, pLine->end);
+			this->pDraw->Line(pLine->start, pLine->end);
 
 			// Calc next lines.
 			if (0 < szIndex)
@@ -165,14 +196,14 @@ void DrawCurveLines(
 		const SLine* pLine = vLines[0];
 
 		glColor4f(fLinesCollorCurrentLayerArray[0], fLinesCollorCurrentLayerArray[1], fLinesCollorCurrentLayerArray[2], fLinesCollorCurrentLayerArray[3]);
-		g_pDraw->Line(pLine->start, pLine->end);
+		this->pDraw->Line(pLine->start, pLine->end);
 
 		// Draw a curve on the points.
 		for (size_t szIndex = 0; szIndex < szCurvePoints; szIndex++)
 		{
 			glPointSize(2);
 			glColor4f(0.5f, 0, 1.0f, 1.0f);
-			g_pDraw->Point(*vPoints[szIndex]);
+			this->pDraw->Point(*vPoints[szIndex]);
 		}
 
 		// Draw the main point of the brush on the last line.
@@ -180,7 +211,7 @@ void DrawCurveLines(
 		pCurve->CalcPointPos(pLine, pPoint, iKeyCurrent);
 		glPointSize(6);
 		glColor4f(1.0f, 0, 0, 1.0f);
-		g_pDraw->Point(*pPoint);
+		this->pDraw->Point(*pPoint);
 		vPoints.push_back(pPoint);
 	}
 	else

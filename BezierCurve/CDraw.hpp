@@ -1,4 +1,5 @@
 #pragma once
+#include "IDraw.hpp"
 #include "head.hpp"
 #include <glut.h>
 
@@ -6,11 +7,7 @@
 #pragma comment (lib, "glut32.lib")
 #pragma comment (lib, "GLU32.lib")
 
-class CDraw;
-
-extern CDraw* g_pDraw;
-
-class CDraw
+class CDraw final : public IDraw
 {
 public:
 	void Point(const POINTFLOAT& point);

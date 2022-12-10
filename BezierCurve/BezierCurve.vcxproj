@@ -104,6 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -174,14 +175,18 @@
     <ClInclude Include="CCurve.hpp" />
     <ClInclude Include="CDraw.hpp" />
     <ClInclude Include="head.hpp" />
+    <ClInclude Include="ICurve.hpp" />
+    <ClInclude Include="IDraw.hpp" />
+    <ClInclude Include="IRender.hpp" />
     <ClInclude Include="main.hpp" />
-    <ClInclude Include="render.hpp" />
+    <ClInclude Include="CRender.hpp" />
+    <ClInclude Include="SLine.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCurve.cpp" />
     <ClCompile Include="CDraw.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="render.cpp" />
+    <ClCompile Include="CRender.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

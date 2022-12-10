@@ -16,6 +16,9 @@
     <Filter Include="Render\Draw">
       <UniqueIdentifier>{fc5358a8-e301-4ed9-8f04-1ac19dfd7c03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Bezier\Structures">
+      <UniqueIdentifier>{cbf57adc-4386-4c56-b89e-5cbbeba6c818}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.hpp">
@@ -30,8 +33,20 @@
     <ClInclude Include="CCurve.hpp">
       <Filter>Bezier</Filter>
     </ClInclude>
-    <ClInclude Include="render.hpp">
+    <ClInclude Include="CRender.hpp">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="IDraw.hpp">
+      <Filter>Render\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="IRender.hpp">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ICurve.hpp">
+      <Filter>Bezier</Filter>
+    </ClInclude>
+    <ClInclude Include="SLine.hpp">
+      <Filter>Bezier\Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,7 +59,7 @@
     <ClCompile Include="CCurve.cpp">
       <Filter>Bezier</Filter>
     </ClCompile>
-    <ClCompile Include="render.cpp">
+    <ClCompile Include="CRender.cpp">
       <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
